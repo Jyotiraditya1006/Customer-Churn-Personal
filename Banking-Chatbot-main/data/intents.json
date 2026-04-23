@@ -1,0 +1,60 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi", "Hello", "Hey", "Good morning", "Is anyone there?", 
+        "Hi there", "Hello bank"
+      ],
+      "responses": [
+        "Hello! Welcome to Apex Bank. How can I assist you today?", 
+        "Hi! I'm your AI assistant. Do you want to check your balance or make a transfer?"
+      ]
+    },
+    {
+      "tag": "balance_inquiry",
+      "patterns": [
+        "How much money is in my account?", "Check my balance", 
+        "What is my current balance?", "Account status", 
+        "View savings", "Available funds", "Balance"
+      ],
+      "responses": [
+        "Your total balance across all accounts is $5,420.50.", 
+        "You currently have $5,420.50 available in your primary account."
+      ]
+    },
+    {
+      "tag": "transfer",
+      "patterns": [
+        "I want to send money", "Transfer funds", "Make a payment", 
+        "Send cash", "Wire transfer", "Pay someone", "Move money"
+      ],
+      "responses": [
+        "Sure, please provide the recipient's account number and the amount you'd like to send.", 
+        "Transfer initiated. Please enter the account number and the dollar amount."
+      ]
+    },
+    {
+      "tag": "payment_info",
+      "patterns": [
+        "The account is 12345", "amount is 500", "send to 9876", 
+        "account number", "dollars", "2000", "500", "100"
+      ],
+      "responses": [
+        "I've noted that information. Processing the request...",
+        "Account and amount details received. Please confirm if you would like to proceed."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye", "See you later", "Goodbye", "I'm done", 
+        "Thanks for the help", "Quit", "Exit"
+      ],
+      "responses": [
+        "Thank you for banking with us. Have a great day!", 
+        "Goodbye! Stay safe and reach out if you need more help."
+      ]
+    }
+  ]
+}
