@@ -1,0 +1,47 @@
+{
+  "cat_cols": [
+    "Geo_idx",
+    "Gender_idx",
+    "HasCrCard",
+    "IsActiveMember"
+  ],
+  "cont_cols": [
+    "CreditScore",
+    "Age",
+    "Tenure",
+    "Balance",
+    "NumOfProducts",
+    "EstimatedSalary"
+  ],
+  "geo_map": {
+    "France": 0,
+    "Germany": 1,
+    "Spain": 2
+  },
+  "gender_map": {
+    "Female": 0,
+    "Male": 1
+  },
+  "cat_cardinalities": [
+    3,
+    2,
+    2,
+    2
+  ],
+  "cont_means": {
+    "CreditScore": 648.3590833333334,
+    "Age": 37.560833333333335,
+    "Tenure": 5.07925,
+    "Balance": 88179.18262666666,
+    "NumOfProducts": 1.5295,
+    "EstimatedSalary": 106304.16971083335
+  },
+  "cont_stds": {
+    "CreditScore": 93.86000009301713,
+    "Age": 9.836887871805413,
+    "Tenure": 3.1560470249298618,
+    "Balance": 58458.164128098535,
+    "NumOfProducts": 0.5815134820685465,
+    "EstimatedSalary": 54578.116174450835
+  }
+}

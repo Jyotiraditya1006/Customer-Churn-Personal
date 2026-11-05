@@ -1,0 +1,7 @@
+{
+  "test_roc_auc": 0.7861,
+  "test_accuracy": 0.7867,
+  "test_f1": 0.0229,
+  "test_precision": 0.5,
+  "test_recall": 0.0117
+}
