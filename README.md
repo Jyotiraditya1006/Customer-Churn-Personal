@@ -27,7 +27,7 @@
 ```mermaid
 flowchart TD
     subgraph Data_Pipeline [Data & Feature Preprocessing]
-        Raw[12,000 Banking Customer Records] --> Clean[Stratified Train/Val/Test Split]
+        Raw[15,000 Worldwide Banking Customer Records] --> Clean[Stratified Train/Val/Test Split]
         Clean --> CatEmbed[Entity Encoders: Geography, Gender, Products, Activity]
         Clean --> ContNorm[Continuous Standardization: Credit, Age, Balance, Salary]
     end
@@ -76,6 +76,23 @@ Benchmark performed on single-item sequential inference (500 iterations):
 | **ONNX Runtime (Graph Optimized)** | **0.07 ms** | **0.08 ms** | **0.09 ms** | **13,815.8 QPS** |
 
 > 🚀 **Result:** ONNX Runtime graph execution achieves a **21.48x acceleration in P99 latency** and delivers **>13,800 queries per second** on single CPU core execution.
+
+---
+
+## 🌍 Worldwide Multi-Region Banking Architecture
+
+Aegis models client behavior across a comprehensive **Worldwide Global Banking Footprint** spanning 6 major international divisions:
+
+| Global Division | Key Financial Centers & Markets | Dominant Retention Drivers |
+| :--- | :--- | :--- |
+| **North America** | New York, Toronto, San Francisco | Wealth advisory fees, high-yield deposit yields, multi-product consolidation |
+| **Europe & UK** | London, Frankfurt, Paris, Madrid | Open banking switching incentives, SEPA fee transparency, multi-currency debit |
+| **Asia-Pacific** | Singapore, Tokyo, Sydney | Cross-border remittance costs, corporate founder liquidity, venture cash management |
+| **South Asia** | Mumbai, Bangalore, New Delhi | Digital UPI integration, competitive loan interest spreads, premier relationship tiers |
+| **Middle East** | Dubai, Abu Dhabi, Riyadh | Ultra-high-net-worth private banking, multi-currency hedging, Sharia-compliant wealth |
+| **Latin America** | São Paulo, Mexico City, Santiago | Inflation-hedge savings, FX transfer margins, mobile-first payment privileges |
+
+The neural architecture utilizes **learned continuous entity embeddings** for regional division encoding, enabling zero-shot demographic transfer and fine-grained regional risk profiling.
 
 ---
 
