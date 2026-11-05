@@ -6,8 +6,19 @@
 [![React](https://img.shields.io/badge/React_18-Tailwind_CSS-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Docker](https://img.shields.io/badge/Docker-Multi--stage-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![CI](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white)](https://github.com/)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Jyotiraditya1006/Customer-Churn-Personal)
 
 > **Aegis** is an end-to-end FinTech customer retention platform designed for high-concurrency banking environments. It integrates a **PyTorch Tabular ResNet** with entity embeddings, graph-compiled **ONNX Runtime serving** achieving **0.09ms P99 latency** (21.48x speedup), **Explainable AI (XAI)** feature attribution, and an **Autonomous Retention Agent** wrapped in an asynchronous **FastAPI** backend and modern **React 18** executive dashboard.
+
+---
+
+## 🌐 Live Demo & Instant Cloud Deployment
+
+| Service | Public Access Link |
+| :--- | :--- |
+| **1-Click Free Cloud Deployment** | [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Jyotiraditya1006/Customer-Churn-Personal) |
+| **API Interactive Swagger Docs** | Available at `/docs` on your deployed domain |
+| **Live Tunnel Preview (Active Session)** | [https://shaky-emus-find.loca.lt](https://shaky-emus-find.loca.lt) *(Tunnel IP: `152.58.31.127`)* |
 
 ---
 

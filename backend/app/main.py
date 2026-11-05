@@ -36,6 +36,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+import os
+from fastapi.staticfiles import StaticFiles
+
 app.include_router(api_router, prefix="/api/v1")
 
 
@@ -49,10 +52,16 @@ async def health_check():
     }
 
 
-@app.get("/", tags=["System Health"])
-async def root():
-    return {
-        "message": "Welcome to Aegis FinTech Churn Intelligence API",
-        "documentation": "/docs",
-        "openapi": "/openapi.json"
-    }
+# Mount compiled React frontend if present
+frontend_dist = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist"))
+if os.path.exists(frontend_dist):
+    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="static")
+else:
+    @app.get("/", tags=["System Health"])
+    async def root():
+        return {
+            "message": "Welcome to Aegis FinTech Churn Intelligence API",
+            "documentation": "/docs",
+            "openapi": "/openapi.json"
+        }
+
