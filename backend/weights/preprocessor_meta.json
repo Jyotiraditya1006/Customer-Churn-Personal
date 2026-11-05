@@ -14,34 +14,61 @@
     "EstimatedSalary"
   ],
   "geo_map": {
-    "France": 0,
+    "North America": 0,
+    "United States": 0,
+    "USA": 0,
+    "Canada": 0,
+    "Europe & UK": 1,
+    "United Kingdom": 1,
+    "UK": 1,
     "Germany": 1,
-    "Spain": 2
+    "France": 1,
+    "Spain": 1,
+    "Asia-Pacific": 2,
+    "Singapore": 2,
+    "Japan": 2,
+    "Australia": 2,
+    "South Asia": 3,
+    "India": 3,
+    "Middle East": 4,
+    "UAE": 4,
+    "Saudi Arabia": 4,
+    "Latin America": 5,
+    "Brazil": 5,
+    "Mexico": 5
   },
+  "global_regions": [
+    "North America",
+    "Europe & UK",
+    "Asia-Pacific",
+    "South Asia",
+    "Middle East",
+    "Latin America"
+  ],
   "gender_map": {
     "Female": 0,
     "Male": 1
   },
   "cat_cardinalities": [
-    3,
+    6,
     2,
     2,
     2
   ],
   "cont_means": {
-    "CreditScore": 648.3590833333334,
-    "Age": 37.560833333333335,
-    "Tenure": 5.07925,
-    "Balance": 88179.18262666666,
-    "NumOfProducts": 1.5295,
-    "EstimatedSalary": 106304.16971083335
+    "CreditScore": 667.0842666666666,
+    "Age": 39.7434,
+    "Tenure": 7.005866666666667,
+    "Balance": 93280.93482133333,
+    "NumOfProducts": 1.5913333333333333,
+    "EstimatedSalary": 132752.466386
   },
   "cont_stds": {
-    "CreditScore": 93.86000009301713,
-    "Age": 9.836887871805413,
-    "Tenure": 3.1560470249298618,
-    "Balance": 58458.164128098535,
-    "NumOfProducts": 0.5815134820685465,
-    "EstimatedSalary": 54578.116174450835
+    "CreditScore": 92.47590362888606,
+    "Age": 10.741796040955116,
+    "Tenure": 4.343472876934355,
+    "Balance": 67078.15836508575,
+    "NumOfProducts": 0.6563182199177027,
+    "EstimatedSalary": 61926.628519350146
   }
 }

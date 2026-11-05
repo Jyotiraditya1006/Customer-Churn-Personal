@@ -27,16 +27,16 @@ import {
 } from 'lucide-react';
 
 const INITIAL_CUSTOMER = {
-  credit_score: 528,
-  geography: 'Germany',
+  credit_score: 542,
+  geography: 'North America',
   gender: 'Female',
   age: 54,
   tenure: 2,
-  balance: 142380.50,
+  balance: 195400.00,
   num_products: 1,
   has_credit_card: 1,
   is_active_member: 0,
-  estimated_salary: 118400.00
+  estimated_salary: 148000.00
 };
 
 export default function App() {
@@ -389,15 +389,18 @@ export default function App() {
                 {/* Regional Branch & Gender */}
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-slate-400 block mb-1 font-medium">Regional Branch Division</label>
+                    <label className="text-slate-400 block mb-1 font-medium">Global Region & Branch</label>
                     <select
                       value={customer.geography}
                       onChange={(e) => handleFieldChange('geography', e.target.value)}
                       className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:border-emerald-500 focus:outline-none font-medium"
                     >
-                      <option value="France">Western Branch (France)</option>
-                      <option value="Germany">Central Branch (Germany)</option>
-                      <option value="Spain">Southern Branch (Spain)</option>
+                      <option value="North America">North America (US & Canada)</option>
+                      <option value="Europe & UK">Europe & UK (London & EU)</option>
+                      <option value="Asia-Pacific">Asia-Pacific (Singapore, Tokyo, Sydney)</option>
+                      <option value="South Asia">South Asia (Mumbai & Delhi)</option>
+                      <option value="Middle East">Middle East (Dubai & Riyadh)</option>
+                      <option value="Latin America">Latin America (São Paulo & Mexico City)</option>
                     </select>
                   </div>
                   <div>
@@ -456,16 +459,16 @@ export default function App() {
                   <input
                     type="range"
                     min="0"
-                    max="220000"
-                    step="2500"
+                    max="500000"
+                    step="5000"
                     value={customer.balance}
                     onChange={(e) => handleFieldChange('balance', parseFloat(e.target.value))}
                     className="w-full accent-emerald-500 h-1.5 bg-slate-800 rounded-lg cursor-pointer"
                   />
                   <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
                     <span>$0 (Zero Bal)</span>
-                    <span>$100,000</span>
-                    <span>$220,000</span>
+                    <span>$250,000 (Premier)</span>
+                    <span>$500,000+ (Private Wealth)</span>
                   </div>
                 </div>
 

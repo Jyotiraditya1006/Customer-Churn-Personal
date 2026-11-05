@@ -3,8 +3,8 @@ from typing import List, Literal, Optional, Dict, Any
 
 
 class CustomerFeatures(BaseModel):
-    credit_score: int = Field(..., ge=300, le=850, description="Customer FICO/credit score", json_schema_extra={"example": 619})
-    geography: Literal["France", "Spain", "Germany"] = Field(..., description="Country of residence", json_schema_extra={"example": "Germany"})
+    credit_score: int = Field(..., ge=300, le=850, description="Customer FICO/credit score", json_schema_extra={"example": 720})
+    geography: str = Field(..., description="Global banking market or country (e.g. North America, Europe & UK, Asia-Pacific, South Asia, Middle East, Latin America)", json_schema_extra={"example": "North America"})
     gender: Literal["Female", "Male"] = Field(..., description="Gender", json_schema_extra={"example": "Female"})
     age: int = Field(..., ge=18, le=100, description="Customer age in years", json_schema_extra={"example": 42})
     tenure: int = Field(..., ge=0, le=20, description="Years as an active bank customer", json_schema_extra={"example": 2})

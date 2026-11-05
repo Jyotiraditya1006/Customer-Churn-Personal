@@ -43,7 +43,7 @@ def run_latency_benchmark(num_iterations: int = 500):
     
     sample_customer = CustomerFeatures(
         credit_score=680,
-        geography="Germany",
+        geography="North America",
         gender="Female",
         age=45,
         tenure=3,

@@ -12,7 +12,7 @@ FEATURE_METADATA = {
     "is_active_member": {"name": "Activity Status", "baseline": 1, "unit": "flag"},
     "num_products": {"name": "Products Count", "baseline": 2, "unit": "products"},
     "credit_score": {"name": "FICO Credit Score", "baseline": 650, "unit": "points"},
-    "geography": {"name": "Regional Market", "baseline": "France", "unit": "country"},
+    "geography": {"name": "Global Market Region", "baseline": "North America", "unit": "region"},
     "tenure": {"name": "Relationship Tenure", "baseline": 5, "unit": "years"},
     "has_credit_card": {"name": "Credit Card Ownership", "baseline": 1, "unit": "flag"},
     "estimated_salary": {"name": "Annual Salary", "baseline": 100000.0, "unit": "USD"},
@@ -29,12 +29,12 @@ class ChurnExplainer:
         self.engine = get_inference_engine()
         # Compute baseline probability for average customer
         self.baseline_customer = CustomerFeatures(
-            credit_score=650,
-            geography="France",
+            credit_score=670,
+            geography="North America",
             gender="Male",
             age=38,
             tenure=5,
-            balance=75000.0,
+            balance=85000.0,
             num_products=2,
             has_credit_card=1,
             is_active_member=1,

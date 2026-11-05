@@ -5,7 +5,7 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Hello! I am your Apex Bank Retention & Advisory Assistant. I am monitoring your client profile in our ${customer.geography === 'Germany' ? 'Central' : customer.geography === 'France' ? 'Western' : 'Southern'} regional branch. How can I assist you with your banking services today?`,
+      content: `Hello! I am your Aegis Global Bank Retention & Advisory Assistant. I am monitoring your client portfolio in our ${customer.geography || 'Global'} division. How can I assist you with your banking services today?`,
       offer: null
     }
   ]);
@@ -27,8 +27,8 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
   const quickPrompts = [
     "I am thinking of closing my account.",
     "Your international wire transfer fees are too high.",
-    "Another bank is offering 5.2% APY on savings.",
-    "What is my current total account balance?"
+    "Another global bank is offering 5.2% APY on savings.",
+    "What is my current total account balance across regions?"
   ];
 
   const handleSend = async (textToSend) => {

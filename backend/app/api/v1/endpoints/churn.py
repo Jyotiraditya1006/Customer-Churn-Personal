@@ -10,78 +10,78 @@ router = APIRouter()
 PRESETS: List[CustomerPreset] = [
     CustomerPreset(
         id="critical_flight_risk",
-        name="Sarah Jenkins",
-        tag="High Net-Worth Flight Risk",
+        name="Sarah Jenkins (New York)",
+        tag="North America • Senior Wealth Client",
         badge_color="red",
-        description="Senior affluent client (Age 54, Balance $142K) holding 1 single account and inactive for 90+ days.",
+        description="Senior affluent US client (Age 54, Balance $195K) holding 1 account and inactive for 90+ days — high competitor flight risk.",
         features=CustomerFeatures(
-            credit_score=528,
-            geography="Germany",
+            credit_score=542,
+            geography="North America",
             gender="Female",
             age=54,
             tenure=2,
-            balance=142380.50,
+            balance=195400.00,
             num_products=1,
             has_credit_card=1,
             is_active_member=0,
-            estimated_salary=118400.00
+            estimated_salary=148000.00
         )
     ),
     CustomerPreset(
         id="loyal_french_saver",
-        name="David Miller",
-        tag="Loyal Active Saver",
+        name="David Miller (London)",
+        tag="Europe & UK • Primary Core Saver",
         badge_color="emerald",
-        description="Mid-career primary client (Age 34, Balance $78K) holding 2 accounts with regular weekly transactions.",
+        description="London mid-career professional (Age 34, Balance $92K) holding 2 accounts with regular weekly domestic & EU transactions.",
         features=CustomerFeatures(
-            credit_score=720,
-            geography="France",
+            credit_score=740,
+            geography="Europe & UK",
             gender="Male",
             age=34,
             tenure=6,
-            balance=78450.00,
+            balance=92450.00,
             num_products=2,
             has_credit_card=1,
             is_active_member=1,
-            estimated_salary=89500.00
+            estimated_salary=105000.00
         )
     ),
     CustomerPreset(
         id="dormant_credit_card",
-        name="Emily Carter",
-        tag="Dormant Account Holder",
+        name="Priya Sharma (Singapore)",
+        tag="Asia-Pacific • Cross-Border Tech Founder",
         badge_color="amber",
-        description="Cardholder with zero active savings balance, dormant for 6+ months and at high risk of account closure.",
+        description="Singapore tech entrepreneur (Age 31, Balance $145K) sensitive to cross-border transfer fees and international wire charges.",
         features=CustomerFeatures(
-            credit_score=608,
-            geography="Spain",
+            credit_score=685,
+            geography="Asia-Pacific",
             gender="Female",
-            age=43,
-            tenure=4,
-            balance=0.00,
+            age=31,
+            tenure=3,
+            balance=145200.00,
             num_products=1,
             has_credit_card=1,
             is_active_member=0,
-            estimated_salary=64200.00
+            estimated_salary=168000.00
         )
     ),
     CustomerPreset(
         id="young_affluent_pro",
-        name="Alex Thompson",
-        tag="Young Multi-Product Professional",
+        name="Tariq Al-Mansoor (Dubai)",
+        tag="Middle East • Private Wealth Client",
         badge_color="blue",
-        description="Young tech professional (Age 28) with high credit score (790) and active checking and investment accounts.",
+        description="Dubai private client (Age 48, Balance $340K) with multi-currency accounts, high credit score (810), and active wealth management.",
         features=CustomerFeatures(
-            credit_score=790,
-            geography="Germany",
+            credit_score=810,
+            geography="Middle East",
             gender="Male",
-            age=28,
-            tenure=3,
-            balance=56200.00,
+            age=48,
+            tenure=5,
+            balance=340000.00,
             num_products=2,
             has_credit_card=1,
             is_active_member=1,
-            estimated_salary=142000.00
+            estimated_salary=285000.00
         )
     )
 ]
