@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import FeatureAttribution from './components/FeatureAttribution';
 import RetentionChat from './components/RetentionChat';
@@ -18,7 +18,12 @@ import {
   TrendingDown,
   TrendingUp,
   Award,
-  Sparkles
+  Sparkles,
+  Gift,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+  ChevronRight
 } from 'lucide-react';
 
 const INITIAL_CUSTOMER = {
@@ -45,6 +50,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSimulatingDrift, setIsSimulatingDrift] = useState(false);
+  const [retentionApplied, setRetentionApplied] = useState(false);
+  const debounceTimer = useRef(null);
 
   useEffect(() => {
     fetchPresets();
@@ -122,6 +129,7 @@ export default function App() {
   const handleSelectPreset = (preset) => {
     setSelectedPresetId(preset.id);
     setCustomer(preset.features);
+    setRetentionApplied(false);
     runInference(preset.features);
   };
 
@@ -129,6 +137,34 @@ export default function App() {
     const updated = { ...customer, [field]: value };
     setCustomer(updated);
     setSelectedPresetId('custom');
+    setRetentionApplied(false);
+
+    // Instant real-time debounced evaluation
+    if (debounceTimer.current) clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(() => {
+      runInference(updated);
+    }, 180);
+  };
+
+  // Interactive retention intervention simulation
+  const handleToggleRetention = () => {
+    if (!retentionApplied) {
+      // Simulate client reactivation + second product bundle
+      const updated = {
+        ...customer,
+        is_active_member: 1,
+        num_products: Math.min(2, Math.max(customer.num_products, 2))
+      };
+      setCustomer(updated);
+      setRetentionApplied(true);
+      runInference(updated);
+    } else {
+      // Reset back to initial preset
+      const original = presets.find((p) => p.id === selectedPresetId)?.features || INITIAL_CUSTOMER;
+      setCustomer(original);
+      setRetentionApplied(false);
+      runInference(original);
+    }
   };
 
   const handleSimulateDrift = async () => {
@@ -149,7 +185,6 @@ export default function App() {
   const churnProb = prediction ? prediction.churn_probability : 0.82;
   const churnPct = Math.round(churnProb * 100);
 
-  // Credit Score Rating helper
   const getCreditRating = (score) => {
     if (score >= 750) return { label: 'Excellent', color: 'text-emerald-400' };
     if (score >= 700) return { label: 'Good', color: 'text-teal-400' };
@@ -185,7 +220,7 @@ export default function App() {
               {prediction?.risk_tier || 'CRITICAL'} RISK
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              Predicted Probability: <span className="font-semibold text-white">{churnPct}%</span>
+              Probability: <span className="font-semibold text-white">{churnPct}%</span>
             </div>
           </div>
 
@@ -198,8 +233,8 @@ export default function App() {
               ${customer.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              Status: <span className={`font-semibold ${customer.is_active_member === 1 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                {customer.is_active_member === 1 ? 'Active Client' : 'Dormant (90+ Days)'}
+              Activity: <span className={`font-semibold ${customer.is_active_member === 1 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                {customer.is_active_member === 1 ? 'Active Account' : 'Dormant (90+ Days)'}
               </span>
             </div>
           </div>
@@ -214,7 +249,7 @@ export default function App() {
               <span className={`text-xs font-semibold ${creditRating.color}`}>({creditRating.label})</span>
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              Cardholder: <span className="font-semibold text-white">{customer.has_credit_card === 1 ? 'Yes' : 'No'}</span>
+              Credit Card: <span className="font-semibold text-white">{customer.has_credit_card === 1 ? 'Active Card' : 'None'}</span>
             </div>
           </div>
 
@@ -227,10 +262,66 @@ export default function App() {
               {prediction?.latency_ms?.toFixed(2) || '0.09'} ms
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              Engine: <span className="font-semibold text-white">ONNX Graph Accelerator</span>
+              Engine: <span className="font-semibold text-white">ONNX Runtime Graph</span>
             </div>
           </div>
 
+        </div>
+
+        {/* Persona Showcase Deck (Instant 1-Click Cards) */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-slate-300 tracking-wider flex items-center space-x-1.5">
+              <Users className="h-3.5 w-3.5 text-emerald-400" />
+              <span>TESTED CLIENT PERSONAS (SELECT TO LOAD):</span>
+            </span>
+            <span className="text-[11px] text-slate-400 font-mono hidden sm:inline">
+              Instant sub-millisecond evaluation
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {presets.map((p) => {
+              const isSelected = selectedPresetId === p.id;
+              const initials = p.name.split(' ').map((n) => n[0]).join('');
+              const isRiskHigh = p.id === 'critical_flight_risk' || p.id === 'dormant_credit_card';
+
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => handleSelectPreset(p)}
+                  className={`p-3.5 rounded-2xl border text-left transition-all duration-200 relative overflow-hidden flex flex-col justify-between ${
+                    isSelected
+                      ? 'bg-slate-800/90 border-emerald-500 ring-2 ring-emerald-500/20 shadow-lg'
+                      : 'bg-slate-900/70 border-slate-800/80 hover:border-slate-700 hover:bg-slate-900 text-slate-300'
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center space-x-2.5">
+                      <div className={`h-8 w-8 rounded-xl font-bold font-mono text-xs flex items-center justify-center ${
+                        isRiskHigh ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                      }`}>
+                        {initials}
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs text-white leading-tight">{p.name}</div>
+                        <div className="text-[10px] text-slate-400 leading-tight">{p.tag}</div>
+                      </div>
+                    </div>
+                    {isSelected && (
+                      <span className="h-5 w-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                        <Check className="h-3 w-3 stroke-[3]" />
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="text-[11px] text-slate-400 leading-snug line-clamp-2 mt-1">
+                    {p.description}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Navigation Tabs */}
@@ -279,43 +370,21 @@ export default function App() {
             {/* Left Column: Customer Profile Configurator (5 cols) */}
             <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col space-y-5">
               
-              <div>
-                <h2 className="text-sm font-bold text-white flex items-center space-x-2">
-                  <Sliders className="h-4 w-4 text-emerald-400" />
-                  <span>Customer Profile Configurator</span>
-                </h2>
-                <p className="text-xs text-slate-400 mt-0.5">Select a customer persona or tune client attributes below.</p>
-              </div>
-
-              {/* Persona Presets */}
-              <div className="space-y-1.5">
-                <span className="text-[11px] font-mono font-semibold tracking-wider text-slate-400">CURATED CLIENT PERSONAS:</span>
-                <div className="grid grid-cols-2 gap-2">
-                  {presets.map((p) => {
-                    const isSelected = selectedPresetId === p.id;
-                    return (
-                      <button
-                        key={p.id}
-                        onClick={() => handleSelectPreset(p)}
-                        className={`p-3 rounded-xl border text-left text-xs transition-all shadow-sm ${
-                          isSelected
-                            ? 'bg-slate-800 border-emerald-500/60 ring-1 ring-emerald-500/30'
-                            : 'bg-slate-950/70 border-slate-800/80 hover:border-slate-700 text-slate-300'
-                        }`}
-                      >
-                        <div className="font-bold text-slate-100 flex items-center justify-between">
-                          <span>{p.name}</span>
-                          {isSelected && <Check className="h-3.5 w-3.5 text-emerald-400" />}
-                        </div>
-                        <div className="text-[10px] text-slate-400 mt-1 truncate">{p.tag}</div>
-                      </button>
-                    );
-                  })}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-sm font-bold text-white flex items-center space-x-2">
+                    <Sliders className="h-4 w-4 text-emerald-400" />
+                    <span>Client Telemetry Tuning</span>
+                  </h2>
+                  <p className="text-xs text-slate-400 mt-0.5">Adjust sliders to see instant real-time risk updates.</p>
                 </div>
+                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                  Live Reactive
+                </span>
               </div>
 
               {/* Attributes Form */}
-              <div className="space-y-4 pt-2 border-t border-slate-800 text-xs">
+              <div className="space-y-4 pt-1 text-xs">
                 
                 {/* Regional Branch & Gender */}
                 <div className="grid grid-cols-2 gap-3">
@@ -393,6 +462,11 @@ export default function App() {
                     onChange={(e) => handleFieldChange('balance', parseFloat(e.target.value))}
                     className="w-full accent-emerald-500 h-1.5 bg-slate-800 rounded-lg cursor-pointer"
                   />
+                  <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                    <span>$0 (Zero Bal)</span>
+                    <span>$100,000</span>
+                    <span>$220,000</span>
+                  </div>
                 </div>
 
                 {/* Products Count */}
@@ -406,7 +480,7 @@ export default function App() {
                         onClick={() => handleFieldChange('num_products', num)}
                         className={`py-2 rounded-xl border font-mono font-bold transition-all shadow-sm ${
                           customer.num_products === num
-                            ? 'bg-emerald-500 text-slate-950 border-emerald-400'
+                            ? 'bg-emerald-500 text-slate-950 border-emerald-400 ring-1 ring-emerald-400'
                             : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
                         }`}
                       >
@@ -451,7 +525,7 @@ export default function App() {
 
               </div>
 
-              {/* Evaluate Button */}
+              {/* Instant Re-evaluate Button */}
               <button
                 onClick={() => runInference(customer)}
                 disabled={loading}
@@ -460,12 +534,12 @@ export default function App() {
                 {loading ? (
                   <>
                     <RefreshCw className="h-4 w-4 animate-spin" />
-                    <span>Evaluating Risk Telemetry...</span>
+                    <span>Evaluating Tensor Graph...</span>
                   </>
                 ) : (
                   <>
                     <Gauge className="h-4 w-4" />
-                    <span>Re-evaluate Customer Churn Risk</span>
+                    <span>Re-evaluate Customer Risk</span>
                   </>
                 )}
               </button>
@@ -480,19 +554,19 @@ export default function App() {
                 
                 {/* Circular Gauge Visual */}
                 <div className="relative flex items-center justify-center shrink-0">
-                  <svg className="w-36 h-36 transform -rotate-90">
+                  <svg className="w-40 h-40 transform -rotate-90">
                     <circle
-                      cx="72"
-                      cy="72"
-                      r="58"
+                      cx="80"
+                      cy="80"
+                      r="65"
                       stroke="#1e293b"
-                      strokeWidth="12"
+                      strokeWidth="14"
                       fill="transparent"
                     />
                     <circle
-                      cx="72"
-                      cy="72"
-                      r="58"
+                      cx="80"
+                      cy="80"
+                      r="65"
                       stroke={
                         churnProb >= 0.70
                           ? '#f43f5e'
@@ -500,26 +574,26 @@ export default function App() {
                           ? '#f59e0b'
                           : '#10b981'
                       }
-                      strokeWidth="12"
-                      strokeDasharray={364.4}
-                      strokeDashoffset={364.4 - (364.4 * churnProb)}
+                      strokeWidth="14"
+                      strokeDasharray={408.4}
+                      strokeDashoffset={408.4 - (408.4 * churnProb)}
                       strokeLinecap="round"
                       fill="transparent"
-                      className="transition-all duration-1000 ease-out"
+                      className="transition-all duration-700 ease-out"
                     />
                   </svg>
                   <div className="absolute flex flex-col items-center">
-                    <span className="font-mono text-3xl font-black text-white tracking-tight">
+                    <span className="font-mono text-3xl sm:text-4xl font-black text-white tracking-tight">
                       {churnPct}%
                     </span>
-                    <span className="text-[10px] text-slate-400 font-mono font-semibold uppercase">CHURN RISK</span>
+                    <span className="text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">CHURN RISK</span>
                   </div>
                 </div>
 
                 {/* Risk Tier & Recommended Policy */}
                 <div className="flex-1 space-y-3">
                   <div className="flex items-center space-x-2">
-                    <span className="text-xs text-slate-400 font-medium">ASSESSED RISK TIER:</span>
+                    <span className="text-xs text-slate-400 font-medium">ASSESSED TIER:</span>
                     <span className={`px-3 py-1 rounded-full text-xs font-mono font-extrabold ${
                       churnProb >= 0.70
                         ? 'bg-rose-500/10 text-rose-400 border border-rose-500/30'
@@ -540,9 +614,23 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono pt-1">
-                    <span>Engine: {prediction?.model_version || 'ONNX'}</span>
-                    <span>Latency: {prediction?.latency_ms?.toFixed(2) || '0.09'} ms</span>
+                  {/* Interactive Retention Simulation Button */}
+                  <div className="pt-1">
+                    <button
+                      onClick={handleToggleRetention}
+                      className={`w-full py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center space-x-2 transition-all ${
+                        retentionApplied
+                          ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-400'
+                          : 'bg-purple-500/10 border-purple-500/30 text-purple-300 hover:bg-purple-500/20'
+                      }`}
+                    >
+                      <Sparkles className="h-3.5 w-3.5" />
+                      <span>
+                        {retentionApplied
+                          ? '✓ Retention Applied: Revert to Base Telemetry'
+                          : '⚡ Simulate Retention Impact (Activate Perks & APY Boost)'}
+                      </span>
+                    </button>
                   </div>
                 </div>
 
