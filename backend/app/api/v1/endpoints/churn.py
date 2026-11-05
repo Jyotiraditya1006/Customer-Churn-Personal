@@ -10,10 +10,10 @@ router = APIRouter()
 PRESETS: List[CustomerPreset] = [
     CustomerPreset(
         id="critical_flight_risk",
-        name="Elena Rostova",
+        name="Sarah Jenkins",
         tag="High Net-Worth Flight Risk",
         badge_color="red",
-        description="German affluent customer (Age 54, Balance $142K) holding 1 product and recently dormant.",
+        description="Senior affluent client (Age 54, Balance $142K) holding 1 single account and inactive for 90+ days.",
         features=CustomerFeatures(
             credit_score=528,
             geography="Germany",
@@ -29,10 +29,10 @@ PRESETS: List[CustomerPreset] = [
     ),
     CustomerPreset(
         id="loyal_french_saver",
-        name="Jean-Luc Moreau",
-        tag="Active Loyal Saver",
+        name="David Miller",
+        tag="Loyal Active Saver",
         badge_color="emerald",
-        description="French mid-career customer (Age 34, Balance $78K) holding 2 products with active monthly usage.",
+        description="Mid-career primary client (Age 34, Balance $78K) holding 2 accounts with regular weekly transactions.",
         features=CustomerFeatures(
             credit_score=720,
             geography="France",
@@ -48,10 +48,10 @@ PRESETS: List[CustomerPreset] = [
     ),
     CustomerPreset(
         id="dormant_credit_card",
-        name="Sofia Delgado",
-        tag="Dormant Zero-Balance User",
+        name="Emily Carter",
+        tag="Dormant Account Holder",
         badge_color="amber",
-        description="Spanish cardholder with zero primary balance, inactive for 6 months and vulnerable to card closure.",
+        description="Cardholder with zero active savings balance, dormant for 6+ months and at high risk of account closure.",
         features=CustomerFeatures(
             credit_score=608,
             geography="Spain",
@@ -67,10 +67,10 @@ PRESETS: List[CustomerPreset] = [
     ),
     CustomerPreset(
         id="young_affluent_pro",
-        name="Maximilian Richter",
+        name="Alex Thompson",
         tag="Young Multi-Product Professional",
         badge_color="blue",
-        description="Young German professional (Age 28) with strong credit score (790) and active checking/savings.",
+        description="Young tech professional (Age 28) with high credit score (790) and active checking and investment accounts.",
         features=CustomerFeatures(
             credit_score=790,
             geography="Germany",

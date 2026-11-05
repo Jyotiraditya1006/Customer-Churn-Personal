@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Sparkles, CheckCircle2, AlertOctagon, Tag, Gift, ChevronRight } from 'lucide-react';
+import { Send, Bot, User, Sparkles, CheckCircle2, Gift, ChevronRight, MessageSquare, AlertCircle } from 'lucide-react';
 
 export default function RetentionChat({ customer, churnProbability, topRiskFactors }) {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Hello! I am your Apex AI Relationship Assistant. I am monitoring your relationship profile in ${customer.geography}. How can I assist you with your banking services today?`,
+      content: `Hello! I am your Apex Bank Retention & Advisory Assistant. I am monitoring your client profile in our ${customer.geography === 'Germany' ? 'Central' : customer.geography === 'France' ? 'Western' : 'Southern'} regional branch. How can I assist you with your banking services today?`,
       offer: null
     }
   ]);
@@ -26,9 +26,9 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
 
   const quickPrompts = [
     "I am thinking of closing my account.",
-    "Your international wire fees are ridiculous.",
+    "Your international wire transfer fees are too high.",
     "Another bank is offering 5.2% APY on savings.",
-    "Can you check my balance and transfers?"
+    "What is my current total account balance?"
   ];
 
   const handleSend = async (textToSend) => {
@@ -76,7 +76,7 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
         ...prev,
         {
           role: 'assistant',
-          content: "I'm having trouble connecting to the retention service. Please ensure the backend is running.",
+          content: "I am having trouble connecting to the retention service. Please ensure the backend is active.",
           offer: null
         }
       ]);
@@ -91,34 +91,34 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
       ...prev,
       {
         role: 'assistant',
-        content: `🎉 Success! Benefit code [${promo}] has been officially applied to your account. Your updated terms are now active.`,
+        content: `🎉 Benefit code [${promo}] has been successfully applied to your account. Your updated terms and fee waivers are now active.`,
         offer: null
       }
     ]);
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col h-[680px]">
+    <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col h-[680px]">
       
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-slate-800">
         <div className="flex items-center space-x-3">
-          <div className="h-9 w-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center shadow-sm">
             <Bot className="h-5 w-5 text-purple-400" />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white flex items-center space-x-2">
-              <span>Autonomous Retention Agent</span>
+            <h3 className="text-sm font-bold text-white flex items-center space-x-2">
+              <span>Autonomous Retention AI Agent</span>
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
             </h3>
             <p className="text-xs text-slate-400">Context-Aware Real-Time Dialogue Engine</p>
           </div>
         </div>
 
-        {/* Sentiment Pill */}
-        <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-mono">
-          <span className="text-slate-400">Sentiment:</span>
-          <span className={`font-semibold ${
+        {/* Sentiment Indicator */}
+        <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-xs font-mono">
+          <span className="text-slate-400">Client Sentiment:</span>
+          <span className={`font-bold ${
             sentiment === 'CHURN_RISK' || sentiment === 'FRUSTRATED'
               ? 'text-rose-400'
               : sentiment === 'SATISFIED'
@@ -135,7 +135,7 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`flex items-start space-x-2.5 ${
+            className={`flex items-start space-x-3 ${
               msg.role === 'user' ? 'justify-end' : 'justify-start'
             }`}
           >
@@ -145,38 +145,38 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
               </div>
             )}
 
-            <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed ${
+            <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs leading-relaxed ${
               msg.role === 'user'
-                ? 'bg-emerald-600 text-white font-medium rounded-tr-sm'
-                : 'bg-slate-800/90 border border-slate-700/60 text-slate-200 rounded-tl-sm'
+                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-medium rounded-tr-sm shadow-md'
+                : 'bg-slate-950/80 border border-slate-800 text-slate-200 rounded-tl-sm shadow-sm'
             }`}>
               {msg.content}
 
               {/* In-chat retention offer card */}
               {msg.offer && (
-                <div className="mt-3 p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-100">
-                  <div className="flex items-center space-x-2 font-semibold text-purple-300 mb-1">
+                <div className="mt-3.5 p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-100 shadow-md">
+                  <div className="flex items-center space-x-2 font-bold text-purple-300 mb-1 text-xs">
                     <Gift className="h-4 w-4 text-purple-400" />
                     <span>{msg.offer.title}</span>
                   </div>
-                  <p className="text-[11px] text-purple-200/90 mb-2.5">{msg.offer.description}</p>
+                  <p className="text-[11px] text-purple-200/90 mb-3">{msg.offer.description}</p>
                   
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-500/30">
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="font-mono text-[11px] px-2.5 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-500/30">
                       {msg.offer.promo_code}
                     </span>
                     {!offerClaimed ? (
                       <button
                         onClick={() => handleClaimOffer(msg.offer.promo_code)}
-                        className="px-2.5 py-1 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-medium text-[11px] transition-colors flex items-center space-x-1"
+                        className="px-3 py-1 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-[11px] transition-all flex items-center space-x-1 shadow-sm"
                       >
                         <span>{msg.offer.action_label}</span>
                         <ChevronRight className="h-3 w-3" />
                       </button>
                     ) : (
-                      <span className="text-[11px] text-emerald-400 font-medium flex items-center space-x-1">
-                        <CheckCircle2 className="h-3.5 w-3.5" />
-                        <span>Applied</span>
+                      <span className="text-[11px] text-emerald-400 font-semibold flex items-center space-x-1">
+                        <CheckCircle2 className="h-4 w-4" />
+                        <span>Benefit Applied to Account</span>
                       </span>
                     )}
                   </div>
@@ -193,23 +193,23 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
         ))}
 
         {loading && (
-          <div className="flex items-center space-x-2 text-xs text-purple-400 animate-pulse pl-9">
+          <div className="flex items-center space-x-2 text-xs text-purple-400 animate-pulse pl-10">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>Agent synthesizing policy offer & response...</span>
+            <span>Agent analyzing customer history and formulating tailored offer...</span>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Quick Prompts Chips */}
-      <div className="py-2 flex items-center space-x-2 overflow-x-auto no-scrollbar border-t border-slate-800">
-        <span className="text-[10px] text-slate-400 font-mono shrink-0">SCENARIOS:</span>
+      {/* Suggested English Scenarios */}
+      <div className="py-2.5 flex items-center space-x-2 overflow-x-auto no-scrollbar border-t border-slate-800">
+        <span className="text-[10px] text-slate-400 font-mono font-bold shrink-0">SCENARIOS:</span>
         {quickPrompts.map((prompt, i) => (
           <button
             key={i}
             onClick={() => handleSend(prompt)}
             disabled={loading}
-            className="text-[11px] px-2.5 py-1 rounded-full bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-white shrink-0 transition-colors"
+            className="text-[11px] px-3 py-1 rounded-full bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white shrink-0 transition-all font-medium"
           >
             {prompt}
           </button>
@@ -228,14 +228,14 @@ export default function RetentionChat({ customer, churnProbability, topRiskFacto
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask a question or simulate client attrition dialogue..."
+          placeholder="Type an inquiry or simulate client dissatisfaction (e.g. 'I want to close my account')..."
           disabled={loading}
           className="flex-1 bg-slate-950 border border-slate-800 focus:border-purple-500 focus:outline-none rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder-slate-500 transition-colors"
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="h-9 w-9 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:hover:bg-purple-600 flex items-center justify-center text-white transition-colors shrink-0"
+          className="h-10 w-10 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-40 disabled:hover:from-purple-600 disabled:hover:to-indigo-600 flex items-center justify-center text-white transition-all shrink-0 shadow-md"
         >
           <Send className="h-4 w-4" />
         </button>
