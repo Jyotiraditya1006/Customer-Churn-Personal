@@ -12,13 +12,13 @@
 
 ---
 
-## 🌐 Live Demo & Instant Cloud Deployment
+## 🌐 Live Production Deployment & Links
 
 | Service | Public Access Link |
 | :--- | :--- |
-| **1-Click Free Cloud Deployment** | [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Jyotiraditya1006/Customer-Churn-Personal) |
-| **API Interactive Swagger Docs** | Available at `/docs` on your deployed domain |
-| **Live Tunnel Preview (Active Session)** | [https://shaky-emus-find.loca.lt](https://shaky-emus-find.loca.lt) *(Tunnel IP: `152.58.31.127`)* |
+| **Live Web App (React Dashboard)** | [**https://customer-churn-personal.onrender.com**](https://customer-churn-personal.onrender.com) |
+| **Interactive OpenAPI / Swagger Docs** | [**https://customer-churn-personal.onrender.com/docs**](https://customer-churn-personal.onrender.com/docs) |
+| **Health Check API** | [https://customer-churn-personal.onrender.com/health](https://customer-churn-personal.onrender.com/health) |
 
 ---
 
